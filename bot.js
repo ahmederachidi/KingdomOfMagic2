@@ -198,13 +198,6 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**You
 });
 
 
-client.on('message', message =>{
-    if (message.author.bot) return;
-    if(message.content == "#type"){
-message.channel.startTyping();
-}
-});
-
 client.on('message' , message => {
       var prefix = "#";
       if(message.author.bot) return;
@@ -226,14 +219,7 @@ client.on('message' , message => {
                     return;
                 }
             message.guild.members.filter(m => m.roles.get(role.id)).forEach(n => {
-              n.send(
-              "**" + "السيرفر :" + "\n" +
-              `${message.guild.name}` + "\n" +
-              "المرسل :" + "\n" +
-              `${message.author.tag}` + "\n" +
-              "الرسالة :" + "\n" +
-              `${codes}` + "**"
-              )
+              n.send(`${codes}`)
             })
             message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عضو`)
         }
