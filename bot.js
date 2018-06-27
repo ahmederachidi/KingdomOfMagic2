@@ -103,7 +103,7 @@ if  (msg.content === 'هلا') {
 });
 
 client.on('message', eyad => {
-  if (eyad.content.startsWith('vb')) {
+  if (eyad.content.startsWith('#vban')) {
 if (!eyad.member.hasPermission("MOVE_MEMBERS")) return eyad.channel.send("**انت لا تمتلك الخاصيه المطلوبه** | ❎ ");
 let men = eyad.mentions.users.first()
 let mas = eyad.author
@@ -312,7 +312,7 @@ if( verifed.some(word => message.author.id.includes(word)) ) {    return message
 
 
 client.on("message", message => {
-    var prefix = ".";
+    var prefix = "#";
     const command = message.content.split(" ")[0];
 
     if(command == prefix+"vkick"){
