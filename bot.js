@@ -297,18 +297,6 @@ if(message.content.startsWith(prefix + 'nickname')) {
 }});
 
 
-var prefix = "#";
-client.on('message', message => {
-  if (!message.content.startsWith(prefix)) return;
-  const verifed = ["ايدي صاحب البوت"];
-if (message.content.startsWith(prefix + 'owner')) {
-if( verifed.some(word => message.author.id.includes(word)) ) {    return message.channel.sendMessage(`**   جا صاحب البوت هنا الكل يوقف**` + `✅`)
-} else {
-   message.reply('**انت لست صاحب البوت**' + '❌');   
-}
-}
-});
-
 
 client.on("message", message => {
     var prefix = "#";
