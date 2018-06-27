@@ -134,7 +134,7 @@ eyad.channel.sendEmbed(Embed11).then(eyad => {eyad.delete(10000)})
 })// نهايه كود الباند الفويس
 
 client.on('message', eyad => {
-  if (eyad.content.startsWith('uvb')) {
+  if (eyad.content.startsWith('#uvb')) {
 if (!eyad.member.hasPermission("MOVE_MEMBERS")) return eyad.channel.send("**انت لا تمتلك الخاصيه المطلوبه** | ❎ ");
  let men = eyad.mentions.users.first()
  let mas = eyad.author
