@@ -87,29 +87,6 @@ client.on('message', message => {
     }
 });
 
-const YTDL = require('ytdl-core')
-const streamOptions = { seek : 0, volume : 1}
-client.on('voiceStateUpdate', (oldMember, newMember) => {
-        let newUserChannel = newMember.voiceChannel
-        let oldUserChannel = oldMember.voiceChannel
-
-
-        if(oldUserChannel === undefined &&  newUserChannel !== undefined && newMember.id === '286088294234718209') {
-
-            console.log("user joined");
-            newMember.voiceChannel.join()
-                .then(connection => {
-                    const stream = YTDL('https://www.youtube.com/watch?v=ufojD9ek7-Y', {filter : 'audioonly'});
-                    const dispatcher = connection.playStream(stream, streamOptions)
-            })
-            .catch(console.error);
-    }   else if(newUserChannel === undefined && oldMember.id === '286088294234718209'){
-        
-        console.log("user left");
-        oldMember.voiceChannel.leave();
-    }
-})
-
 const Slam = [
   'هلا بيك',
   'منور يا ولد',
