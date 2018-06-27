@@ -25,7 +25,13 @@ client.on('message', message => {
   	}
 });
 
+client.on('message',function(message) {
+    
+    if(message.content.startsWith("<@461630831136604170>")) {
+        message.channel.send('Hey Im **Kingdom Of Magic Bot**  A Nice Bot Developed By:`<@286088294234718209>`')
 
+    }
+});
 
 
 
