@@ -70,6 +70,21 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  }
    });
 
+client.on('message', message => {
+    if (!message.guild) return; 
+    if (message.content.startsWith("رابط")) {
 
+        message.channel.createInvite({
+        thing: true,
+        maxUses: 4,
+        maxAge: 86400
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+  message.channel.send(`** تم أرسال الرابط برسالة خاصة **`)
+
+      message.author.send(`**هذا الرابط لاربع اشخاص و لمدة 24 ساعة **`)
+    }
+});
 
 client.login(process.env.TOKEN);
