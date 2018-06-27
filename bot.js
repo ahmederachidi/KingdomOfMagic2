@@ -229,7 +229,7 @@ message.channel.startTyping();
 });
 
 client.on('message' , message => {
-      var prefix = "";
+      var prefix = "#";
       if(message.author.bot) return;
      
       if(message.content.startsWith(prefix + "rolebc")) {
@@ -264,7 +264,7 @@ client.on('message' , message => {
 
 
 client.on('message', message => {
-    var prefix = "!";
+    var prefix = "#";
 
       if (!message.content.startsWith(prefix)) return;
       var args = message.content.split(' ').slice(1);
@@ -301,6 +301,72 @@ client.on('message', message => {
 
 
      });
+
+client.on("message",  message => {
+    var prefix = "#";
+    let args = message.content.split(' ').slice(1);
+if(message.content.startsWith(prefix + 'nickname')) {
+   if (!message.member.hasPermission("MANAGE_NICKNAMES")) {
+       message.channel.send("ضع الاسم")
+   } else {
+       if (!message.guild.member(client.user).hasPermission('MANAGE_NICKNAMES')) return message.reply(' ❌البوت ما عنده خاصية MANAGE_NICKNAMES.').catch(console.error);
+       let changenick = message.mentions.users.first();
+       let username = args.slice(1).join(' ')
+       if (username.length < 1) return message.reply('ضع الاسم').catch(console.error);
+       if (message.mentions.users.size < 1) return message.author.send('You must mention a user to change their nickname. ❌').catch(console.error);
+       message.guild.member(changenick.id).setNickname(username);
+       message.channel.send("تم تغيير الاسم الى: " + changenick + "")
+   }
+}});
+
+
+var prefix = "#";
+client.on('message', message => {
+  if (!message.content.startsWith(prefix)) return;
+  const verifed = ["ايدي صاحب البوت"];
+if (message.content.startsWith(prefix + 'owner')) {
+if( verifed.some(word => message.author.id.includes(word)) ) {    return message.channel.sendMessage(`**   جا صاحب البوت هنا الكل يوقف**` + `✅`)
+} else {
+   message.reply('**انت لست صاحب البوت**' + '❌');   
+}
+}
+});
+
+
+
+client.on("message", message => {
+    var prefix = ".";
+    const command = message.content.split(" ")[0];
+
+    if(command == prefix+"vkick"){
+
+        if (!message.guild.member(message.author).hasPermission('MOVE_MEMBERS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
+            return message.reply('you do not have permission to perform this action!');
+        }
+
+        var member = message.guild.members.get(message.mentions.users.array()[0].id);
+        if(!message.mentions.users){
+            message.reply("please mention the member")
+            return;
+        }
+
+    if(!member.voiceChannel){
+    message.reply("i can't include voice channel for member!")
+    return;
+    }
+              message.guild.createChannel('voicekick', 'voice').then(c => {
+                member.setVoiceChannel(c).then(() => {
+                    c.delete(305).catch(console.log)
+        
+
+
+    
+      });
+     });
+    }
+});
+
+
 
 
 
