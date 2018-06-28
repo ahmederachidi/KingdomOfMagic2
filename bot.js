@@ -317,7 +317,23 @@ client.on("message", message => {
 });
 
 
+client.on("message", async function(message)  {
+let voiceMembers = message.guild.channels.get('461663814593675264');
+if(message.content.startsWith(prefix + "voice")) {
+    voiceMembers.sendMessage(`**الاعضاء المتواجدون حاليا : ${message.guild.members.filter(member => member.voiceChannel).size}**`);
+    voiceMembers.sendMessage('```\n'+message.guild.members.filter(member => member.voiceChannel).map(m => m.user.tag).join('\n') + '```');
+    
+}
+});
 
+client.on("message", async function(message)  {
+let voiceMembers = message.guild.channels.get('429649147046395914');
+if(message.content.startsWith(prefix + "voice")) {
+    voiceMembers.sendMessage(`**الاعضاء المتواجدون حاليا : ${message.guild.members.filter(member => member.voiceChannel).size}**`);
+    voiceMembers.sendMessage('```\n'+message.guild.members.filter(member => member.voiceChannel).map(m => m.user.tag).join('\n') + '```');
+    
+}
+});
 
 
 
