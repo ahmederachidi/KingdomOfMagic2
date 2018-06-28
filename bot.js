@@ -317,24 +317,18 @@ client.on("message", message => {
 });
 
 
-client.on("message", async function(message)  {
-let voiceMembers = message.guild.channels.get('461663814593675264');
-if(message.content.startsWith(prefix + "voice")) {
-    voiceMembers.sendMessage(`**الاعضاء المتواجدون حاليا : ${message.guild.members.filter(member => member.voiceChannel).size}**`);
-    voiceMembers.sendMessage('```\n'+message.guild.members.filter(member => member.voiceChannel).map(m => m.user.tag).join('\n') + '```');
-    
-}
+client.on('message', msg =>{
+    let message=msg;
+    if(message.content.startsWith("#bc")){
+        var args = message.content.split(' ').slice(1).join(' ');
+    msg.guild.members.forEach(m=>{
+        m.send(args.replace(/[user]/g,m)).catch();
+    if(message.attachments.first()){
+m.sendFile(message.attachments.first().url).catch();
+    }
+    })    ;
+    }
 });
-
-client.on("message", async function(message)  {
-let voiceMembers = message.guild.channels.get('429649147046395914');
-if(message.content.startsWith(prefix + "voice")) {
-    voiceMembers.sendMessage(`**الاعضاء المتواجدون حاليا : ${message.guild.members.filter(member => member.voiceChannel).size}**`);
-    voiceMembers.sendMessage('```\n'+message.guild.members.filter(member => member.voiceChannel).map(m => m.user.tag).join('\n') + '```');
-    
-}
-});
-
 
 
 client.login(process.env.TOKEN);
