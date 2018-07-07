@@ -30,9 +30,7 @@ client.on('ready', () => {
   console.log('')
   console.log(`Users! [ " ${client.users.size} " ]`);
   console.log('')
-  console.log('╚[════════════════════════════════════]╝')
-          client.user.setActivity("you",{type: 'WATCHING'});
-  
+  console.log('╚[════════════════════════════════════]╝')  
   });
 
   client.on('message', message => {
