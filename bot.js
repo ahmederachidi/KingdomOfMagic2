@@ -14,7 +14,6 @@
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = '!!'
 
 
 client.on('ready', () => {
@@ -46,7 +45,7 @@ message.channel.stopTyping()
 
 client.on('message', msg => {
 
-    if (msg.content == '!ادخل') {
+    if (msg.content == '#join') {
         if (msg.member.voiceChannel) {
 
      if (msg.member.voiceChannel.joinable) {
@@ -74,6 +73,7 @@ client.on('message',function(message) {
 
 
 client.on('message', message => {
+    var prefix = "#";
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -93,7 +93,7 @@ if (!rank) return message.reply('انت لا تمتلك الرتبه المخص�
 });
 
 client.on('message', message => {
-if(message.content.startsWith(prefix + 'move all')) {
+if(message.content.startsWith(prefix + '#move all')) {
  if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -202,13 +202,6 @@ const Embed11 = new Discord.RichEmbed()
 eyad.channel.sendEmbed(Embed11).then(eyad => {eyad.delete(15000)})
     }
 }) // نهايه كود فك الباند الفويس
-
-client.on('message', message => {
-  if(message.content === prefix + 'myid') {
-    
-    message.channel.send('**The 🆔 is : `' + message.author.id + '`**.')
-  }
-})
 
 client.on('message', message => {
 
@@ -513,7 +506,7 @@ client.on('message', async message => {
 });
 
 client.on('message', message => {
-    var prefix = "$";
+    var prefix = "#";
     
         if (message.author.id === client.user.id) return;
         if (message.guild) {
@@ -522,7 +515,7 @@ client.on('message', message => {
     if(message.content.split(' ')[0] == prefix + 'bc') {
         if (!args[1]) {
       message.channel.startTyping();
-    message.channel.send("**$bc <message>**");
+    message.channel.send("**#bc <message>**");
     return;
     }
             message.guild.members.forEach(m => {
@@ -542,6 +535,7 @@ client.on('message', message => {
     });
 
 client.on('message', function(message) {
+    var prefix = "#";
 	const myID = "286088294234718209";
     let args = message.content.split(" ").slice(1).join(" ");
     if(message.content.startsWith(prefix + "setname")) {
@@ -596,6 +590,7 @@ client.on('message', function(message) {
 });
 
   client.on('message',async message => {
+    var prefix = "#";
     if(message.content.startsWith(prefix + "restart")) {
         if(message.author.id !== "286088294234718209") return message.reply('You aren\'t the bot owner.');
         message.channel.send('**Restarting.**').then(msg => {
@@ -626,8 +621,8 @@ client.on('message', function(message) {
 });
   
 client.on('message', message => { 
-let PREFIX = '$'
-    if (message.content.startsWith(PREFIX + 'emojilist')) {
+let PREFIX = '#'
+    if (message.content.startsWith(prefix + 'emojilist')) {
        message.channel.startTyping();
         const List = message.guild.emojis.map(e => e.toString()).join(" ");
 
@@ -650,23 +645,6 @@ client.on('message', message => {
 message.channel.send(`${user} has ${inviteCount} invites.`);
 });
   }
-});
-
-client.on('message' , async (message) => {
- if (message.content.startsWith(prefix + 'yn')) {
-
-let color = '0xffffff'
-
-      const { body } = await superagent
-    .get('https://yesno.wtf/api/');
-    if(body.answer === 'yes') color = '0x01DF01';
-    if(body.answer === 'no') color = '0xFF0000';
-    const embed = new Discord.RichEmbed()
-    .setColor(color)
-    .setImage(`${body.image}`)
-    message.channel.send(`**The magic API says:** **${body.answer}**`, {embed});
-
-}
 });
 
 
