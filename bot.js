@@ -16,12 +16,14 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '#'
 
+
 client.on('ready', () => {
-    console.log('-----------------');
-    console.log('|| BOT IS ONLINE ||');
-    console.log('|| BOT BY : KAHRBA ||');
-    console.log('-----------------');
-});
+    console.log(`Logged in as ${client.user.tag} !`);
+    console.log(`Bot By 'Kahrba.`);
+          client.user.setActivity("you",{type: 'WATCHING'});
+  
+  });
+
 
 client.on('message', message => {
     if (message.content === 'ping') {
