@@ -672,7 +672,7 @@ let color = '0xffffff'
 });
 
 client.on('message', message => {
-if (message.content === prefix + "info.u") {
+if (message.content === "info-user") {
 var year = message.createdAt.getFullYear()
 var month = message.createdAt.getMonth()
 var day = message.createdAt.getDate()
