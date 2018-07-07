@@ -691,6 +691,7 @@ var day = message.createdAt.getDate()
     }
 })
 
+const moment = require('moment');
 
 client.on("guildMemberAdd", member => {
 let welcomer = member.guild.channels.find("name","اسم روم الترحيب");
