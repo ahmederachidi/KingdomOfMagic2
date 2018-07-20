@@ -717,9 +717,6 @@ channel.guild.owner.send(`<@!${channelremover.id}>
   }
 });
 
-client.login(process.env.TOKEN)
-
-
 client.on('message', async message => {
   if(message.content.startsWith(prefix + "تقديم")) {
     await message.channel.send("**:writing_hand: لماذ تريد التقديم ؟ **").then(e => {
