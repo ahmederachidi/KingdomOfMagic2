@@ -20,24 +20,27 @@ const dateFormat = require('dateformat');
 const fs = require('fs');
 const queue = new Map();
 const client = new Discord.Client();
-const adminprefix = "-";
-const devs = ['298512085552463872','286088294234718209'];
+const adminprefix = "k!";
+const devs = ['286088294234718209'];
 const prefix = '-'
-
 
 client.on('ready', () => {
 	// - 
-  client.user.setActivity("FireShop <3",{type: 'WATCHING'});
-  console.log('================================')
+  client.user.setActivity("Pharahos <3",{type: 'WATCHING'});
+  console.log('╔[════════════════════════════════════]╗');
+  console.log('')
+  console.log('            ╔[════════════]╗')
+  console.log('              Bot Is Online')
+  console.log('            ╚[════════════]╝')
+  console.log('')
   console.log(`Logged in as ${client.user.tag}!`);
   console.log('')
   console.log(`servers! [ " ${client.guilds.size} " ]`);
   console.log('')
   console.log(`Users! [ " ${client.users.size} " ]`);
   console.log('')
-  console.log('=================================')
+  console.log('╚[════════════════════════════════════]╝')
 });
-
 
   client.on('message', message => {
 if(message.content == '<@469648375986257939>') {
@@ -52,14 +55,15 @@ message.channel.stopTyping()
 client.on('message', message => {
 if(message.content === adminprefix + "restart") {
       if (!devs.includes(message.author.id)) return;
-          message.channel.send(`?? **الشخص الذي اعاد تشغيل البوت ${message.author.username}**`);
-        console.log(`?? جاري اعادة تشغيل البوت... ??`);
+          message.channel.send(`⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**`);
+        console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
         console.log(`تم اعادة تشغيل البوت`);
     }
   
   }); // By Kahrba
+
 
 
   client.on('message', message => {
@@ -79,11 +83,23 @@ if(message.content === adminprefix + "restart") {
     }
 });
 
+client.on('voiceStateUpdate', (old, now) => {
+  const channel = client.channels.get('469262105443565568');
+  const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
+  const size = channel.name.match(/\[\s(\d+)\s\]/);
+  if (!size) return channel.setName(`Pharaoh Voice : ${currentSize}`);
+  if (currentSize !== size) channel.setName(`Fireshop Voice : ${currentSize}`);
+});
 
+
+
+
+  
 client.on('message' , message => {
+      var prefix = "-";
       if(message.author.bot) return;
      
-      if(message.content.startsWith( "-rolebc")) {
+      if(message.content.startsWith(prefix + "rolebc")) {
         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
         let args = message.content.split(" ").slice(2);
      var codes = args.join(' ')
@@ -114,9 +130,89 @@ client.on('message' , message => {
     });
 
 client.on('message', message => {
+if(message.content === prefix + 'info' || message.content === prefix + 'شرح') {
+    let pages = ['https://media.discordapp.net/attachments/446719436385419265/465905488232448001/PharahosTM.png?width=468&height=468','https://media.discordapp.net/attachments/446719436385419265/465905470842994691/info.png','https://media.discordapp.net/attachments/446719436385419265/465905475985342475/News.png','https://media.discordapp.net/attachments/446719436385419265/465905472440893441/Ruels.png','https://media.discordapp.net/attachments/446719436385419265/465905474747891743/Chat.png','https://media.discordapp.net/attachments/446719436385419265/465907892739112960/Photo.png','https://media.discordapp.net/attachments/446719436385419265/465905487758491659/bot.png','https://media.discordapp.net/attachments/446719436385419265/465905488232448001/PharahosTM.png?width=468&height=468']
+	let page = 1;
+	
+	message.delete();
+	
+	let embed = new Discord.RichEmbed()
+	.setColor('#264d00')
+	.setFooter(`شرح | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://media.discordapp.net/attachments/446719436385419265/465905488232448001/PharahosTM.png?width=468&height=468')
+	.setImage(pages[page-1])
+	
+// ${page}
+// ${pages.length}
+	message.channel.sendEmbed(embed).then(msg => {
+		
+		msg.react('⏮').then( r => {
+			msg.react('⬅')
+		.then(() => msg.react('⏹'))
+		.then(() => msg.react('➡'))
+		.then(() => msg.react('⏭'))
+			
+			let backwardsFilter = (reaction, user) => reaction.emoji.name === '⬅' && user.id === message.author.id;
+			let forwardsFilter = (reaction, user) => reaction.emoji.name === '➡' && user.id === message.author.id;
+			
+			let sbackwardsFilter = (reaction, user) => reaction.emoji.name === '⏮' && user.id === message.author.id;
+			let sforwardsFilter = (reaction, user) => reaction.emoji.name === '⏭' && user.id === message.author.id;
+			
+			let cancelFilter = (reaction, user) => reaction.emoji.name === '⏹' && user.id === message.author.id;
+			
+			let backwards = msg.createReactionCollector(backwardsFilter, { time: 0 });
+			let forwards = msg.createReactionCollector(forwardsFilter, { time: 0 });
+			
+			let sbackwards = msg.createReactionCollector(sbackwardsFilter, { time: 0 });
+			let sforwards = msg.createReactionCollector(sforwardsFilter, { time: 0 });
+			
+			let cancel = msg.createReactionCollector(cancelFilter, { time: 0 });
+			
+			backwards.on('collect', r => {
+				if (page === 1) return;
+				page--;
+				embed.setImage(pages[page-1]);
+				embed.setFooter(`شرح | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://media.discordapp.net/attachments/446719436385419265/465905488232448001/PharahosTM.png?width=468&height=468');
+				msg.edit(embed)
+			})
+			forwards.on('collect', r => {
+				if (page === pages.length) return;
+				page++;
+				embed.setImage(pages[page-1]);
+				embed.setFooter(`شرح | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://media.discordapp.net/attachments/446719436385419265/465905488232448001/PharahosTM.png?width=468&height=468');
+				msg.edit(embed)
+			})
+			sbackwards.on('collect', r => {
+				if (page === 1) return;
+				page = 1;
+				embed.setImage(pages[page-1]);
+				embed.setFooter(`شرح | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://media.discordapp.net/attachments/446719436385419265/465905488232448001/PharahosTM.png?width=468&height=468');
+				msg.edit(embed)
+			})
+			sforwards.on('collect', r => {
+				if (page === pages.length) return;
+				page = 8; 
+				embed.setImage(pages[page-1]);
+				embed.setFooter(`شرح | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://media.discordapp.net/attachments/446719436385419265/465905488232448001/PharahosTM.png?width=468&height=468');
+				msg.edit(embed)
+			})
+			cancel.on('collect', r => {
+				embed.setDescription(`**سوف يتم إغلاق القائمة**`);
+				embed.setImage('');
+				embed.setFooter(`Menu will close after 3sec`, 'https://media.discordapp.net/attachments/446719436385419265/465905488232448001/PharahosTM.png?width=468&height=468');
+				msg.edit(embed).then(msg.delete(3000));
+			})
+		})
+	})
+}
+});
+
+
+
+
+client.on('message', message => {
 
            if (message.content.startsWith( "هويتي")) {
-                     if(!message.channel.guild) return message.reply(`هذا الأمر فقط ل السيرفرات ?`);
+                     if(!message.channel.guild) return message.reply(`هذا الأمر فقط ل السيرفرات ❌`);
 
                 message.guild.fetchInvites().then(invs => {
       let member = client.guilds.get(message.guild.id).members.get(message.author.id);
@@ -156,6 +252,7 @@ var mentionned = message.mentions.members.first();
          
      });
 
+  
 client.on('message', message => {
     var prefix = "-";
     
@@ -184,8 +281,9 @@ client.on('message', message => {
         }
     });
 
+
 client.on('message', message => {
-if(message.content.startsWith( 'اسحب')) {
+if(message.content.startsWith( 'سحب الجميع')) {
  if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -199,6 +297,56 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
 
  }
    });
+   
+   
+client.on('message', message => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+
+
+if (command == "say") {
+let rank = message.guild.member(message.author).roles.find('name', '.');
+if (!rank) return message.reply('انت لا تمتلك الرتبه المخصصه لهذا الامر')
+  message.channel.send(args.join("  "))
+    message.delete();
+  }
+});
+//
+
+
+var jimp = require('jimp')
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('guildMemberAdd', member => {
+
+    const channel = member.guild.channels.find('name', 'chat');
+  
+    const millis = new Date().getTime() - member.user.createdAt.getTime();
+    const now = new Date();
+    const createdAt = millis / 1000 / 60 / 60 / 24;
+
+
+
+
+  
+    const embed = new Discord.RichEmbed()
+    
+    .setColor("#1f0707")
+    .setDescription(`**تاريخ دخولك للدسكورد منذ ${createdAt.toFixed(0)} يوم**`)
+    .setAuthor(member.user.tag, member.user.avatarURL);
+    channel.sendEmbed(embed);
+
+  
+});
 
 client.on('message', async message => {
     let args = message.content.split(" ");
@@ -271,7 +419,7 @@ client.on('message',function(message) {
     let toKick = message.mentions.users.first();
     let toReason = message.content.split(" ").slice(2).join(" ");
     let toEmbed = new Discord.RichEmbed()
-   if(message.content.startsWith('طرد')) {
+   if(message.content.startsWith('برا')) {
        if(!message.member.hasPermission("KICK_MEMBERS")) return message.reply('**# - You dont have enough permissions!**');
        if(toKick.bannable) return message.reply("**# - I cannot kick someone with a higher role than me!**");
        if(!toReason) return message.reply("**# - Supply a reason!**")
@@ -373,7 +521,7 @@ client.on('message', async message => {
       mention.removeRole(role);
       message.channel.send(`**:white_check_mark: ${mention.user.username} unmuted in the server ! :neutral_face:  **  `);
     },duration * 60000);
-  } else if(message.content.startsWith( "اتكلم")) {
+  } else if(message.content.startsWith("اتكلم")) {
     let mention = message.mentions.members.first();
     let role = message.guild.roles.find('name', 'Muted') || message.guild.roles.get(r => r.name === 'Muted');
     if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply('**أنت لا تملك الخصائص اللازمة . يجب توفر خاصية `Manage Roles`**').then(msg => {
@@ -405,6 +553,8 @@ client.on('message', async message => {
            newRebel.author.send("ممنوع روآبط الدسكورد. \n إذآ كنت تريد النشر توآصل من الإدآرة.");
     }
 });
+
+
 
 client.on("message", message => {
     const command = message.content.split(" ")[0];
