@@ -20,8 +20,8 @@ const dateFormat = require('dateformat');
 const fs = require('fs');
 const queue = new Map();
 const client = new Discord.Client();
-const adminprefix = "k!";
-const devs = ['286088294234718209'];
+const adminprefix = "!!";
+const devs = ['298512085552463872','286088294234718209'];
 const prefix = '-'
 
 client.on('ready', () => {
