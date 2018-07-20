@@ -12,8 +12,6 @@
 // #                                                                      #
 // ########################################################################
 
-
-
 const Discord = require('discord.js');
 const child_process = require("child_process");
 const moment = require('moment');
@@ -42,7 +40,7 @@ client.on('ready', () => {
 
 
   client.on('message', message => {
-if(message.content == '<@465920139770986506>') {
+if(message.content == '<@469648375986257939>') {
 message.channel.startTyping()
 setTimeout(() => { 
 message.channel.stopTyping()
@@ -719,7 +717,7 @@ channel.guild.owner.send(`<@!${channelremover.id}>
   }
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN)
 
 
 client.on('message', async message => {
@@ -753,14 +751,14 @@ if(gg) {
 gg.send({embed : new Discord.RichEmbed()
 .setDescription(`**سبب التقديم : \n ${lan}\n الاشياء التي يبيعها :\n ${md} \nطرق الدفع هي:  :\n ${br}  **`)  
           .setFooter(`FireShop.`)
-.setTimestamp()
+.setTimestamp()//By Codes , - ST I EdiTeD , .#4968//By Codes , - ST I EdiTeD , .#4968//By Codes , - ST I EdiTeD , .#4968//By Codes , - ST I EdiTeD , .#4968
 });
 }        
 })
 })
+})//By Codes , - ST I EdiTeD , .#4968
 })
 })
-})
- });
+ }//By Codes ,
 	  
 client.login(process.env.TOKEN);
