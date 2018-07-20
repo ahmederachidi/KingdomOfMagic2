@@ -438,52 +438,6 @@ client.on("message", message => {
 });
 
  
-
- client.on('message', msg => {
-    if(msg.content === '-help') {
-        
-        if(!msg.channel.guild) return msg.reply("هذا الأمر للسيرفرات فقط")
-        let staff = msg.guild.member(msg.author).roles.find('name', 'Founder');
-       
-if(!staff) return msg.reply('انت لست من الأداره')
-if (msg.author.bot) return;
-  const embed = new Discord.RichEmbed()
-           .setThumbnail(message.author.avatarURL)
-           .setColor("#FF0000")
-           .setDescription(`**    :sleuth_or_spy::skin-tone-1: اوامر الأداره :sleuth_or_spy::skin-tone-1:**
-**============ **
-  ** سحب @user |  لسحب الشخص الى روومك** :confused: 
-  
-  ** لسحب جميع الاعضاء المتواجدين في الرومات الصوتية للروم حقكك | اسحب ** :fire:
-
-  ** لمعرفة معلومات عن حسابي | هويتي ** :id:
-
-  ** -bc | رسالة جماعية الى كل اعضاء السيرفر** :mega:
-
-  ** -rolebc @rank <Text> | ارسال رسالة لكل من لديهم رتبة ** :mega:
-
-  ** ميوت @user <Time> <reason> | اعطاء العضو ميوت لازم رتبة <Muted>**:mute:
-
-  ** فك الميوت @user | لفك الميوت عن الشخص ** :loud_sound:
-
-  ** طرد @user <reason> | طرد الشخص من السيرفر**  :outbox_tray:
-
-  ** اطرد @user | لطرد شخص من الروم الصوتي ** :walking: 
-	
-  ** باند @user <reason> | حضر الشخص من السيرفر** :no_entry:
-
-  ** -mutechannel | تقفيل الشات**:no_entry:
-
-  ** -unmutechannel | فتح الشات**:on:   
-
-  || قم بعمل روم - log , لمنع الجلفلة والتهكير ||
-  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- `)
-        msg.author.sendEmbed(embed)
-
-    }
-
-});
-
 client.on('message', message => {
 
 
