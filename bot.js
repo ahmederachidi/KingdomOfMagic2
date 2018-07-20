@@ -437,56 +437,7 @@ client.on("message", message => {
     }
 });
 
-client.on('message', eyad =>{
-      let args = eyad.content.split(" ").slice(2).join(" ")
-      let men = eyad.mentions.users.first()
-      let mas = eyad.author
-      if(eyad.content.startsWith(prefix + 'sar7')) {
-          if(!args) return eyad.channel.send("`Usage: " + prefix + 'sar7 <@someone> <message>`');
-          if(!men) return eyad.channel.send("`Usage: " + prefix + 'sar7 <@someone> <message>`');
-          const embed = new Discord.RichEmbed()
-          .setColor("RANDOM")
-          .setDescription(`**
-          <@${men.id}>
-           لقد تم مصارحتك
-           __${args}__
-           **`)
-    .setImage("https://cdn.discordapp.com/attachments/429056808561278979/450412294078332948/download.jpg")
-          
-          eyad.author.sendEmbed(embed)
-                const Embed11 = new Discord.RichEmbed()
-          .setColor("RANDOM")
-                  .setAuthor(eyad.guild.name, eyad.guild.iconURL)
-                  .setDescription(`لقد تم مصارحه العضو <@${eyad.author.id}>`)
-  .setImage("https://cdn.discordapp.com/attachments/429056808561278979/450412294078332948/download.jpg")
-       eyad.channel.sendEmbed(Embed11).then(eyad => {eyad.delete(10000)})
-      }
-  });
  
-client.on('message', msg => {
-  if (msg.author.bot) return;
-  if (!msg.content.startsWith(prefix)) return;
-  let command = msg.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  let args = msg.content.split(" ").slice(1);
-
-    if(command === "clear") {
-        const emoji = client.emojis.find("name", "wastebasket")
-    let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if (textxt == "") {
-        msg.delete().then
-    msg.channel.send("***``ضع عدد الرسائل التي تريد مسحها ??``***").then(m => m.delete(3000));
-} else {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(textxt);
-        msg.channel.send("``php\nعدد الرسائل التي تم مسحها: " + textxt + "\n``").then(m => m.delete(3000));
-        }    
-    }
-}
-});
-
 
  client.on('message', msg => {
     if(msg.content === '-help') {
@@ -510,8 +461,6 @@ if (msg.author.bot) return;
   ** -bc | رسالة جماعية الى كل اعضاء السيرفر** :mega:
 
   ** -rolebc @rank <Text> | ارسال رسالة لكل من لديهم رتبة ** :mega:
-
-  ** -clear | مسح الشات ** :recycle: 
 
   ** ميوت @user <Time> <reason> | اعطاء العضو ميوت لازم رتبة <Muted>**:mute:
 
@@ -593,80 +542,6 @@ message.react("?")
  }}});
 
   
-  client.on('message',async message => {
-  let mention = message.mentions.members.first();
-  let acRoom = client.channels.get('469630631802961920');
-  if(message.content.startsWith( "-رفض")) {
-  if(message.guild.id !== '469252372678311947') return;
-  if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return;
-  if(!mention) return message.reply("منشن شخص");
-
-  acRoom.send(`**${mention} تم رفضك للاسف**`)
-  }
-});
-
-  
-  client.on('message',async message => {
-  let mention = message.mentions.members.first();
-  let role = message.content.split(" ").slice(2).join(" ");
-  let mySupport = message.guild.roles.find('name',role);
-  let acRoom = client.channels.get('469630608667312132');
-  if(message.content.startsWith( "-قبول")) {
-    if(message.guild.id !== '469252372678311947') return;
-    if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return;
-    if(!mention) return message.reply('منشن شخص');
-    if(!role) return message.reply('ادخل اسم رتبة');
-    if(!mySupport) return message.reply('هذه الرتبة غير موجودة');
-    if(mention.roles.has(mySupport)) return message.reply('هذا الشخص معه الرتبة مسبقا');
-
-    mention.addRole(mySupport).then(() => {
-      acRoom.send(`**[ ${mySupport} ] واعطائك رتبة ${mention} تم بنجاح قبولك**`);
-    });
-  }
-});
-
-
-client.on('message', async message => {
-  if(message.content.startsWith(prefix + "تقديم")) {
-    await message.channel.send("**:writing_hand: لماذا تريد التقديم **").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let lan = '';
-    let md = '';
-    let br = '';
-    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-    .then(collected => {
-      lan = collected.first().content
-      collected.first().delete()
-e.edit(`**:ما هي انواع الاشياء التي سوف تبيعها**`)
-let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(co => {
-  md = co.first().content
-        co.first().delete()
-        e.edit(`**طرق الدفع ؟**`)
-let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(col => {
-  br = col.first().content
-        col.first().delete()
-e.edit("**جاري التقديم علي طلبك...**").then(b => {
-        setTimeout(() => {
-  b.edit(`**تم التقديم وسيتم الرد فـ اقرب وقت**`)
-        },2000);
-var gg = message.guild.channels.find('name', 'التقديم')
-if(!gg) return;
-if(gg) {
-gg.send({embed : new Discord.RichEmbed()
-.setDescription(`**سبب التقديم : \n ${lan}\n ما هي الاشياء التي تبيعها :\n ${md} \n طرق الدفع :\n ${br}  **`)  
-          .setFooter(`FireShop.`)
-.setTimestamp()
-});
-}        
-})
-})
-})
-})
-})
- }
-
 
 	  
 client.login(process.env.TOKEN);
