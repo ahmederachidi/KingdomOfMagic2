@@ -84,7 +84,7 @@ if(message.content === adminprefix + "restart") {
 });
 
 client.on('voiceStateUpdate', (old, now) => {
-  const channel = client.channels.get('469262105443565568');
+  const channel = client.channels.get('469252372678311950');
   const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
   const size = channel.name.match(/\[\s(\d+)\s\]/);
   if (!size) return channel.setName(`Pharaoh Voice : ${currentSize}`);
