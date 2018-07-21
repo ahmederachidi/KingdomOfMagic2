@@ -26,7 +26,7 @@ const prefix = '-'
 
 client.on('ready', () => {
 	// - 
-  client.user.setActivity("Pharahos <3",{type: 'WATCHING'});
+  client.user.setActivity("FireShop <3",{type: 'WATCHING'});
   console.log('╔[════════════════════════════════════]╗');
   console.log('')
   console.log('            ╔[════════════]╗')
