@@ -25,7 +25,6 @@ const moment = require('moment');
 const request = require('request');
 const dateFormat = require('dateformat');
 const fs = require('fs');
-const queue = new Map();
 const client = new Discord.Client();
 const adminprefix = "!!";
 const devs = ['298512085552463872','286088294234718209'];
