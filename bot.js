@@ -884,7 +884,7 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
 
 
   client.on("message", message => {
-    var prefix = "--"; // غير هنا حط البرفكس
+    var prefix = "-"; // غير هنا حط البرفكس
  
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clear")) {
